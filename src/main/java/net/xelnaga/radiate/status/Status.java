@@ -27,4 +27,5 @@ public abstract class Status {
     public abstract Result getResult();
     public abstract State getState();
     public abstract Iterable<ChangeLogSet.Entry> getChanges();
+    public abstract int getHealth();
 }

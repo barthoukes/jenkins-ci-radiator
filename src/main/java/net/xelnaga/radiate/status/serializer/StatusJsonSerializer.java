@@ -33,6 +33,7 @@ public class StatusJsonSerializer extends BaseJsonSerializer {
         addEstimate();
         addCauses();
         addChanges();
+        addHealthScore();
 
         return makeMap(_elements);
     }
@@ -78,6 +79,12 @@ public class StatusJsonSerializer extends BaseJsonSerializer {
 
         ChangeJsonSerializer changeJsonSerializer = new ChangeJsonSerializer();
         String element = makeQuotedKey("changes") + changeJsonSerializer.toJson(_status.getChanges());
+        _elements.add(element);
+    }
+
+    private void addHealthScore(){
+
+        String element = makeQuotedKey("health") + _status.getHealth();
         _elements.add(element);
     }
 }

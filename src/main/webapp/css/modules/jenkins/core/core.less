@@ -1,0 +1,170 @@
+* {
+    font-family: 'Droid Sans', arial, serif;
+    color: #ccc;
+}
+
+body {
+    background-color: #000;
+    margin: 0;
+}
+
+section.green {
+    h1 {
+        background-color: #0A0;
+    }
+}
+
+section.yellow {
+
+    h1 {
+        background-color: #ED0;
+    }
+}
+
+section.purple {
+
+    h1 {
+        background-color: #B3B;
+    }
+}
+
+section.red {
+
+    h1 {
+        background-color: #D33;
+    }
+}
+
+section.blue {
+
+    h1 {
+        background-color: #44D;
+    }
+}
+
+section.dark-red {
+
+    h1 {
+        background-color: #B50;
+    }
+}
+
+section {
+
+    margin: 1em;
+
+    .gradient(rgb(82, 82, 82), rgb(82, 82, 82), rgb(36, 36, 36));
+    .rounded(15px);
+
+    h1 {
+        background-color: #888;
+        .rounded-top(15px);
+        font-size: 1.6em;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.25), -1px -1px 1px rgba(0, 0, 0, 0.25);
+
+        span {
+            .gradient(rgb(82, 82, 82), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
+            .rounded-top(15px);
+
+            border-color: rgba(0, 0, 0, 0.25);
+            border-style: solid;
+            border-width: 0 0 1px;
+
+            display: block;
+            padding: 10px 16px 5px;
+            position: relative;
+        }
+    }
+
+    .container {
+        border-color: rgba(0, 0, 0, 0.25);
+        border-style: solid;
+        border-width: 1px 0 0;
+
+        width: 100%;
+    }
+
+    table {
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            color: #FFF;
+            font-size: 1.5em;
+            font-weight: normal;
+        }
+
+        td {
+            font-size: 1.3em;
+
+            .project-name {
+                display:block;
+            }
+
+            .build-time, .build-trigger {
+                font-size:.8em;
+                display:inline-block;
+                padding-right:1em;
+            }
+        }
+
+        tbody {
+            tr {
+                background-color: #4c4c4c;
+                border-color: rgba(128,128,128,0.25);
+                border-style: solid;
+                border-width: 1px 0;
+            }
+        }
+
+        border: 0;
+        border-collapse: collapse;
+        margin: 0;
+        padding: 0;
+        text-shadow: 1px 1px 2px #000;
+        width: 100%;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+section h1, section h1 span, section h1 strong {
+    color: #000;
+}
+
+.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF){
+    background: @color;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, @start), color-stop(1, @stop));
+    background: -ms-linear-gradient(bottom,
+        @start,
+        @stop);
+    background: -moz-linear-gradient(center bottom,
+        @start 0%,
+        @stop 100%);
+}
+
+.rounded(@radius: 2px){
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+.rounded-top(@radius){
+    -webkit-border-radius: @radius @radius 0 0;
+    -moz-border-radius: @radius @radius 0 0;
+    border-radius: @radius @radius 0 0;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}

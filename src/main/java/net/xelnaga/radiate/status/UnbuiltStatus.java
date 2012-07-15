@@ -58,4 +58,9 @@ class UnbuiltStatus extends Status {
     public Iterable<ChangeLogSet.Entry> getChanges() {
         return new ArrayList<ChangeLogSet.Entry>();
     }
+
+    @Override
+    public int getHealth() {
+        return 0;
+    }
 }

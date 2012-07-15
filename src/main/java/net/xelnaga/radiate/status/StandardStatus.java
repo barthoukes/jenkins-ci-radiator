@@ -107,4 +107,10 @@ public class StandardStatus extends Status {
 
         return new ArrayList<ChangeLogSet.Entry>();
     }
+
+    @Override
+    public int getHealth() {
+
+        return job.getBuildHealth().getScore();
+    }
 }

@@ -1,0 +1,5 @@
+Started by user anonymous
+[ffdsfdsfdsf] $ /bin/sh -xe /tmp/hudson5505408369888134675.sh
++ exit 1
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
