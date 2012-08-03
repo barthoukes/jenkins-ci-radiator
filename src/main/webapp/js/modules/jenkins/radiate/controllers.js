@@ -4,28 +4,82 @@ MilesBurton.radiate
     $scope.builds = [];
     $scope.states = ['success', 'building', 'failure', 'unstable', 'aborted', 'notbuilt', 'disabled', 'unknown'];
 
-    var updateExistingBuilds = function (existingBuilds, updatedBuilds) {
+    $scope.processBuilds = function () {
 
-        $(existingBuilds).each(function (idx, existingBuild) {
+        Build.query(function (newBuilds) {
 
-            updateExistingBuild(updatedBuilds, existingBuild);
+
+            $.each(newBuilds, function () {
+
+                ifNewBuildAdd($scope.builds, this);
+                updateBuildIfChanged($scope.builds, this);
+
+            });
+
+
+            $.each($scope.builds, function () {
+                ifBuildRemoveDelete(newBuilds, this);
+            });
+
+            $timeout($scope.processBuilds, 1000);
+
         });
     };
 
-    var updateExistingBuild = function (builds, existingBuild) {
+    var updateBuildIfChanged = function (builds, prospect) {
 
-        var updatedBuilds = $.grep(builds, function (newBuild) {
-            return isBuildUpdated(existingBuild, newBuild);
-        });
+        var buildToUpdate;
 
-        if (updatedBuilds.length > 0) {
+        var isUpdated = $.grep(builds,
+            function (existing, idx) {
+                buildToUpdate = existing;
+                if (!isSameBuild(existing, prospect)) {
+                    return false;
+                }
+                if (isBuildUpdated(existing, prospect)) {
+                    return true;
+                } else {
+                    return false;
+                }
 
-            updateBuild(existingBuild, updatedBuilds[0]);
+            }).length > 0;
+
+
+        if (isUpdated) {
+            updateBuild(buildToUpdate, prospect);
         }
     };
 
+
+    var ifNewBuildAdd = function (builds, prospect) {
+
+        var isExistingBuild = $.grep(builds,
+            function (existing, idx) {
+                return isSameBuild(existing, prospect);
+            }).length > 0;
+
+        if (!isExistingBuild) {
+            $scope.builds.push(prospect);
+        }
+
+    };
+
+    var ifBuildRemoveDelete = function (builds, prospect) {
+
+        var isRemoved = $.grep(builds,
+            function (existing, idx) {
+                return isSameBuild(existing, prospect);
+            }).length == 0;
+
+        if (isRemoved) {
+            $scope.builds.removeItem(prospect);
+        }
+
+    };
+
+
     var isBuildUpdated = function (existingBuild, newBuild) {
-        return newBuild.name == existingBuild.name && newBuild.timestamp > existingBuild.timestamp;
+        return newBuild.timestamp > existingBuild.timestamp || newBuild.state != existingBuild.state;
     };
 
     var updateBuild = function (build, update) {
@@ -39,43 +93,8 @@ MilesBurton.radiate
     };
 
 
-    var addNewBuilds = function (existingBuilds, newBuilds) {
-
-        $.grep(newBuilds, function (newBuild, idx) {
-
-            ifNewAddBuild($scope.builds, newBuild);
-        });
-    };
-
-    var ifNewAddBuild = function (builds, newBuild) {
-
-        var existingBuilds = $.grep(builds, function (oldBuild) {
-
-            return isSameBuild(newBuild, oldBuild);
-        });
-
-        if (existingBuilds.length == 0) {
-
-            builds.push(newBuild);
-        }
-    };
-
-
     var isSameBuild = function (existingBuild, newBuild) {
         return existingBuild.name == newBuild.name;
-    };
-
-    $scope.fetchBuilds = function () {
-
-        Build.query(function (newBuilds) {
-
-            updateExistingBuilds($scope.builds, newBuilds);
-
-            addNewBuilds($scope.builds, newBuilds);
-
-            $timeout($scope.fetchBuilds, 1000);
-
-        });
     };
 
 
@@ -119,16 +138,13 @@ MilesBurton.radiate
         }
     };
 
-    $scope.formatDate = function(millis) {
+    $scope.formatDate = function (millis) {
 
         return new Date(millis).radiateFormat();
     };
 
 
-
-
-
-    $scope.fetchBuilds();
+    $scope.processBuilds();
 
 }]);
 

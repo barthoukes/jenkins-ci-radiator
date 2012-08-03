@@ -31,10 +31,7 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>always building</string>
-        <string>Building</string>
-        <string>ffdsfdsfdsf</string>
-        <string>sdsadsad</string>
+        <string>test</string>
       </jobNames>
       <jobFilters/>
       <columns>

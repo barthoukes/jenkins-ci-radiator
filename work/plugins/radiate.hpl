@@ -3,11 +3,11 @@ Group-Id: net.xelnaga
 Short-Name: radiate
 Long-Name: Radiate Plugin
 Url: http://jenkins-ci.org/plugin/radiate
-Plugin-Version: 1.0.0-SNAPSHOT (private-07/15/2012 18:41-miles)
+Plugin-Version: 1.0.0-SNAPSHOT (private-08/03/2012 21:30-miles)
 Hudson-Version: 1.437
 Jenkins-Version: 1.437
-Plugin-Dependencies: ant:1.1,subversion:1.25,ui-samples-plugin:1.437,m
- aven-plugin:1.437,javadoc:1.0
+Plugin-Dependencies: javadoc:1.0,ui-samples-plugin:1.437,ant:1.1,subve
+ rsion:1.25,maven-plugin:1.437
 Plugin-Developers: 
 Libraries: /home/miles/workspace/jenkins-ci-radiator/target/classes,/h
  ome/miles/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2
